@@ -65,14 +65,18 @@ class Subway:
 	
 	def search_query(self, start_station: tuple[int, str], end_station: tuple[int, str])\
 		-> dict[str, int | list[tuple[int, str]]]:
+		if start_station not in self.stations:
+			return {"weight": -2, "path": [start_station]}
+		if end_station not in self.stations:
+			return {"weight": -2, "path": [end_station]}
 		start_station_index = self.stations.index(start_station)
 		end_station_index = self.stations.index(end_station)
-		wegiht = self.subway_time_matrix[start_station_index, end_station_index]
+		weight = self.subway_time_matrix[start_station_index, end_station_index]
 		low_path = self.subway_path_matrix[start_station_index, end_station_index]
-		if np.isinf(wegiht):
+		if np.isinf(weight):
 			return {"weight": -1, "path": []}
 		path = [self.stations[i] for i in low_path]
 		return {
-			"weight": int(wegiht),
+			"weight": int(weight),
 			"path": path
 		}

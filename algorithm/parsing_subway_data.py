@@ -5,7 +5,7 @@ def subway_parsing(file_name):
 	subway_line = {}
 	if not os.path.exists(file_name):
 		return None
-	with open(file_name, 'r') as file:
+	with open(file_name, 'r', encoding='utf-8') as file:
 		subway_line_num = 0
 		while True:
 			text = file.readline()
